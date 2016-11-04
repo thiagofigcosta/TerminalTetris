@@ -59,7 +59,8 @@ int blockFoward(tp_block *self){
     return canMoveFow;
 }
 void blockRotate(tp_block *self){
-    int buffer[sizeYblock][sizeXblock];
+    try{
+        int buffer[sizeYblock][sizeXblock];
     int backup[sizeYblock][sizeXblock];
     for(int y=0;y<sizeYblock;y++)
         for(int x=0;x<sizeXblock;x++){
@@ -164,7 +165,11 @@ void blockRotate(tp_block *self){
         for(int y=0;y<sizeYblock;y++)
         for(int x=0;x<sizeXblock;x++)
             self->block[y][x]=backup[y][x];
-        
+    }catch(const std::exception& e){
+        for(int y=0;y<sizeYblock;y++)
+        for(int x=0;x<sizeXblock;x++)
+            self->block[y][x]=backup[y][x];
+    }  
 }
 void blockGen(tp_block *self,int n,char* color){
     strcpy(self->color,color);
