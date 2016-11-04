@@ -1,6 +1,7 @@
 //THIAGO POWER CLASS FILE - tpClass
 #include <stdlib.h>
 #include <string.h>
+#include <stdexcept>
 
 //declara funções
 typedef   void (*function_initBlock)(tp_block *self,tp_stage *fase,int steps);
@@ -59,9 +60,9 @@ int blockFoward(tp_block *self){
     return canMoveFow;
 }
 void blockRotate(tp_block *self){
-    try{
-        int buffer[sizeYblock][sizeXblock];
+int buffer[sizeYblock][sizeXblock];
     int backup[sizeYblock][sizeXblock];
+    try{
     for(int y=0;y<sizeYblock;y++)
         for(int x=0;x<sizeXblock;x++){
             backup[y][x]=self->block[y][x];
@@ -165,7 +166,11 @@ void blockRotate(tp_block *self){
         for(int y=0;y<sizeYblock;y++)
         for(int x=0;x<sizeXblock;x++)
             self->block[y][x]=backup[y][x];
-    }catch(const std::exception& e){
+    }catch(const std::exception& e){//
+        for(int y=0;y<sizeYblock;y++)
+        for(int x=0;x<sizeXblock;x++)
+            self->block[y][x]=backup[y][x];
+    }  catch(...){//
         for(int y=0;y<sizeYblock;y++)
         for(int x=0;x<sizeXblock;x++)
             self->block[y][x]=backup[y][x];

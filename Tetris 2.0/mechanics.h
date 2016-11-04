@@ -9,6 +9,8 @@
 #include <assert.h>
 #include <string.h>
 
+#include <stdexcept>
+
 #define OS 0
 #ifdef __linux__
 	#define OS 0
@@ -172,21 +174,21 @@ int getarrow(tp_mechanics *self){
 
 void printfC(char *content,char *color){
 	    if(!strcmp(color,"red"))
-	        printf(KRED "%s",content, RESET);
+	        printf(KRED "%s",content);//, RESET);
 	    else if (!strcmp(color,"green"))
-	        printf(KGRN "%s",content, RESET);
+	        printf(KGRN "%s",content);//, RESET);
 	    else if (!strcmp(color,"yellow"))
-	        printf(KYEL "%s",content, RESET);
+	        printf(KYEL "%s",content);//, RESET);
 	    else if (!strcmp(color,"blue"))
-	        printf(KBLU "%s",content, RESET);
+	        printf(KBLU "%s",content);//, RESET);
 	    else if (!strcmp(color,"pink"))
-	        printf(KMAG "%s",content, RESET);
+	        printf(KMAG "%s",content);//, RESET);
 	    else if (!strcmp(color,"cyan"))
-	        printf(KCYN "%s",content, RESET);
+	        printf(KCYN "%s",content);//, RESET);
 	    else if (!strcmp(color,"white"))
-	        printf(KWHT "%s",content, RESET);
+	        printf(KWHT "%s",content);//, RESET);
 	    else
-	        printf(KNRM "%s",content, RESET);
+	        printf(KNRM "%s",content);//printf(KNRM "%s",content, RESET);
 }
 
 void* getInput(void *argsvoid){             //thread não funciona dentro do objeto....
@@ -299,13 +301,15 @@ void imprimirFase(tp_mechanics *self,tp_stage *stage,tp_block *block,int scoreat
 }
 
 void mix(tp_stage *stage,tp_block *block){
+try{
     for(int y=0;y<sizeYblock;y++)
     for(int x=0;x<sizeXblock;x++)
         if(block->block[y][x]&&y+block->pos.y>=0)
+	if(y+block->pos.y<sizeYstage&&x+block->pos.x<sizeXstage)
             stage->stage[y+block->pos.y][x+block->pos.x]=block->block[y][x];
-
+}catch(const std::exception& e){
+}catch(...){}
 }
-
 //inicia o objeto
 void tp_mechanics_init(tp_mechanics *self, int up, int down, int right, int left, int block, int scale, int zueira, int timetomove, int sleeptime){
     //atribui funções
