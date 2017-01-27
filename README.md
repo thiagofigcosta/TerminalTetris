@@ -17,6 +17,7 @@ ENUS
 ABOUT
 -------------------------------------------------------
 Game tetris recreated in the terminal using pure C and class concepts.
+(Better on linux)
 The MIT License (MIT) read LICENSE.txt;	
 
 
@@ -40,6 +41,7 @@ PTBR
 SOBRE
 -------------------------------------------------------
 Jogo tetris recriado no terminal usando conceitos de classe em C puro.
+(Melhor no linux)
 The MIT License (MIT) read LICENSE.txt;	
 
 
